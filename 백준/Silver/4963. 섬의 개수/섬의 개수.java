@@ -37,16 +37,28 @@ public class Main{
 				for(int j=0;j<M;j++) {
 					if(board[i][j]==1&&!visited[i][j]) {
 						count++;
-						dfs(i,j);
-//						bfs();
+						//dfs(i,j);
+						bfs(i,j);
 					}
 				}
 			}
 			System.out.println(count);
 		}
 	}
-	private static void bfs() {
-		// TODO Auto-generated method stub
+	private static void bfs(int y, int x) {
+		visited[y][x]=true;
+		Queue<node> queue = new ArrayDeque<>();
+		queue.add(new node(y,x));
+		while(!queue.isEmpty()) {
+			node temp = queue.poll();
+			for(int i=0;i<8;i++) {
+				if(temp.x+dx[i]>=0&&temp.x+dx[i]<M&&temp.y+dy[i]>=0&&temp.y+dy[i]<N
+						&& !visited[temp.y+dy[i]][temp.x+dx[i]]&&board[temp.y+dy[i]][temp.x+dx[i]]==1) {
+					visited[temp.y+dy[i]][temp.x+dx[i]]=true;
+					queue.add(new node(temp.y+dy[i],temp.x+dx[i]));
+				}
+			}
+		}
 		
 	}
 	private static void dfs(int y, int x) {
